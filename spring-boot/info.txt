@@ -1,0 +1,2 @@
+Spring Boot back-end with Hibernate and MySQL
+JWT Tokens used for authentication
