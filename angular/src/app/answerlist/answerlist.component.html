@@ -1,0 +1,27 @@
+<h1>{{question.title}} </h1>
+<h4>{{question.description}}</h4>
+<br>
+<br>
+<button class="btn btn-primary" (click)=displayCreateForm()> Give Answer</button>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div *ngFor="let x of answers">
+        <app-answer [ans]="x"> </app-answer>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="create-category-form" [ngClass]="{hide: formhidden == 1}">
+        <form>
+
+            <div class="form-group">
+              <label for="answerContent">Answer Body</label><br>
+              <textarea name="name" rows="8" cols="80" id="answerContent" [(ngModel)]="newAnswerText">Enter answer here</textarea>
+            </div>
+            <button class="btn btn-primary" (click)=onSubmit(newAnswerText)> Submit Answer </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
