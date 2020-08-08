@@ -1,0 +1,21 @@
+<div class="categories">
+  <div *ngFor="let categoryEl of categories">
+    <ques-category [category]="categoryEl" (selectedCategory)="onCategorySelected(categoryEl)">
+    </ques-category>
+  </div>
+</div>
+<hr>
+<button class="btn btn-primary" (click)=displayCreateForm()> New Category </button>
+<div class="create-category-form" [ngClass]="{hide: formhidden == 1}">
+  <form>
+      <div class="form-group">
+        <label for="categoryTitle">Category Name</label><br>
+        <input name="name" type="text" class="form-control" id="categoryTitle" [(ngModel)]="newCategoryTitle">
+      </div>
+      <div class="form-group">
+        <label for="categoryDescription">Description</label><br>
+        <textarea name="description" rows="8" cols="80" id="categoryDescription" [(ngModel)]="newCategoryDescription">Enter description here</textarea>
+      </div>
+      <button class="btn btn-primary" (click)=onSubmit(newCategoryTitle,newCategoryDescription)> Add Category </button>
+  </form>
+</div>

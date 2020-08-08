@@ -1,0 +1,30 @@
+<h1>{{category.name}} </h1>
+<h4>{{category.description}}</h4>
+<br>
+<br>
+<button class="btn btn-primary" (click)=displayCreateForm()> Create Question</button>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div *ngFor="let x of questions">
+        <a [routerLink]="['question',x.id]"><app-question [ques]="x"> </app-question></a>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="create-category-form" [ngClass]="{hide: formhidden == 1}">
+        <form>
+            <div class="form-group">
+              <label for="questionTitle">Question Title</label><br>
+              <input name="title" type="text" class="form-control" id="questionTitle" [(ngModel)]="newQuestionTitle">
+            </div>
+            <div class="form-group">
+              <label for="questionDescription">Question Description</label><br>
+              <textarea name="name" rows="8" cols="80" id="questionDescription" [(ngModel)]="newQuestionDescription">Enter description here</textarea>
+            </div>
+            <button class="btn btn-primary" (click)=onSubmit(newQuestionTitle,newQuestionDescription)> Add Question </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
