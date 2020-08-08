@@ -1,0 +1,3 @@
+<p> {{ans.content}} </p>
+<span> Upvotes: {{ans.upvotes}} </span> &nbsp; <span *ngIf="ans.userUpvoted==true"><button class="btn btn-danger" (click)=removeUpvote()> Remove upvote </button></span>
+<span *ngIf="ans.userUpvoted==false"><button class="btn btn-success" (click)=createUpvote()> Upvote </button></span>

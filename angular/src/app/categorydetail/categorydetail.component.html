@@ -1,0 +1,19 @@
+<h1>{{categoryDisplayed.name}} </h1>
+<h3>{{categoryDisplayed.description}}</h3>
+<!--<h3>Most Popular Questions</h3>
+<div>
+<question-list>
+</question-list>
+</div> -->
+
+<a [routerLink]="['../category',categoryDisplayed.id]"><button class="btn btn-primary"> Visit Main Page</button></a> &nbsp;
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    More
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Ask Questions</a>
+    <a class="dropdown-item" href="#">Edit Name</a>
+    <a class="dropdown-item" href="#">Delete</a>
+  </div>
+</div>
