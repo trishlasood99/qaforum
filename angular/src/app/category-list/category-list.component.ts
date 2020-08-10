@@ -1,6 +1,6 @@
 import { Component, OnInit,Output, EventEmitter} from '@angular/core';
-import {CategoryListService} from '../categorylist.service';
-import {Category} from '../category.model';
+import {CategoryListService} from '../services/categorylist.service';
+import {Category} from '../models/category.model';
 
 @Component({
   selector: 'ques-category-list',

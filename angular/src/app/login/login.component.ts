@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {TokenStorageService} from '../token-storage.service';
-import {AuthService} from '../auth.service'
+import { Component, OnInit, Output } from '@angular/core';
+import {TokenStorageService} from '../services/token-storage.service';
+import {AuthService} from '../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
+  //@Output userLoggedIn =  new EventEmitter <boolean> ();
   //roles: string[] = [];
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
-
+        //this.userLoggedIn.emit(true);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         //this.roles = this.tokenStorage.getUser().roles;

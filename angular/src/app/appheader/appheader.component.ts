@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppheaderComponent implements OnInit {
 
+  //usersignedin:boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  /*logoutUser()
+  {
+
+  }
+*/
 }

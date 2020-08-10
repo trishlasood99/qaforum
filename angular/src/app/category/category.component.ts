@@ -1,6 +1,6 @@
 import { Component,Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import {Category} from '../category.model'
+import {Category} from '../models/category.model'
 
 @Component({
   selector: 'ques-category',
@@ -11,7 +11,7 @@ export class CategoryComponent implements OnInit {
 
   @Output() selectedCategory = new EventEmitter<void> ();
   @Input() category:Category;  //@Input exposes category property of the controller for binding
-  
+
   constructor() {
 
   }

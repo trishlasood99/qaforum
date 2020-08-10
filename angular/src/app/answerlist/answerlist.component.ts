@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Question} from '../question.model';
-import {Answer} from '../answer.model';
-import {AnswerListService} from '../answerlist.service';
+import {Question} from '../models/question.model';
+import {Answer} from '../models/answer.model';
+import {AnswerListService} from '../services/answerlist.service';
 import {Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 

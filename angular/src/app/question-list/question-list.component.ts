@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Question} from '../question.model';
-import {Category} from '../category.model';
-import {QuestionListService} from '../questionlist.service';
+import {Question} from '../models/question.model';
+import {Category} from '../models/category.model';
+import {QuestionListService} from '../services/questionlist.service';
 import {Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {SingleCategoryService} from '../singlecategory.service';
+//import {SingleCategoryService} from '../services/singlecategory.service';
 
 @Component({
   selector: 'question-list',

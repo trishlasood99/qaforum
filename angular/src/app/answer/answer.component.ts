@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
-import {Answer} from '../answer.model';
-import {AnswerListService} from '../answerlist.service';
+import {Answer} from '../models/answer.model';
+import {AnswerListService} from '../services/answerlist.service';
 
 @Component({
   selector: 'app-answer',
