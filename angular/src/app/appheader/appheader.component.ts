@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import
+import {TokenStorageService} from '../services/token-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -8,16 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppheaderComponent implements OnInit {
 
-  //usersignedin:boolean = false;
+  isLoggedIn = false;
 
-  constructor() { }
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+      this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+      if (this.isLoggedIn) {
+        const user = this.tokenStorageService.getUser();
+        //this.roles = user.roles;
+
+        //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+        //this.showModeratorBoard = this.roles.includes('ROLE_USER');
+
+        //this.username = user.username;
+      }
   }
 
-  /*logoutUser()
+  logoutUser()
   {
-
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
-*/
+
 }

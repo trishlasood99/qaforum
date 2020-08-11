@@ -11,8 +11,8 @@
     </div>
     <div class="buttonsgroup">
       <a routerLink="/signup" routerLinkActive="active"><button class="btn btn-light">Sign Up</button></a> &nbsp;
-      <!-- <span *ngIf="usersignedin==true"><button class="btn btn-light" (click)=logoutUser()> Logout </button></span> -->
-      <!-- ><span *ngIf="usersignedin==false"> --><a routerLink="/login" routerLinkActive="active"><button class="btn btn-light">Log In</button></a> <!--</span>-->
+      <span *ngIf="isLoggedIn==true"><button class="btn btn-light" (click)=logoutUser()> Logout </button></span>
+      <span *ngIf="isLoggedIn==false"> --><a routerLink="/login" routerLinkActive="active"><button class="btn btn-light">Log In</button></a></span>
 
     </div>
   </div>

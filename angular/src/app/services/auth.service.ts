@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {User} from '../models/user.model'
+import { User } from '../models/user.model'
 const AUTH_API = 'http://localhost:5000/api/auth/';
 
 const httpOptions = {
@@ -30,6 +30,10 @@ export class AuthService {
       email: user.email,
       password: user.password
     }, httpOptions);
+  }
+
+  signOut() {
+    window.sessionStorage.clear();
   }
 
 }
