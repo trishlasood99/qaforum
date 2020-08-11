@@ -21,6 +21,7 @@ import com.qaforum.www.qaforum.payload.AnswerRequest;
 import com.qaforum.www.qaforum.payload.AnswerResponse;
 import com.qaforum.www.qaforum.payload.UpvoteRequest;
 import com.qaforum.www.qaforum.repository.AnswerRepository;
+import com.qaforum.www.qaforum.repository.CategoryRepository;
 import com.qaforum.www.qaforum.repository.QuestionRepository;
 import com.qaforum.www.qaforum.repository.UpvoteRepository;
 import com.qaforum.www.qaforum.repository.UserRepository;
@@ -36,14 +37,26 @@ public class AnswerService {
 	
     @Autowired
     private UpvoteRepository upvoteRepository;
+    
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private UserRepository userRepository;
     
     private static final Logger logger = LoggerFactory.getLogger(AnswerService.class);
 
-    public List<AnswerResponse> getAllAnswers(UserPrincipal currentUser, long questionId)
+    public List<AnswerResponse> getAllAnswers(UserPrincipal currentUser, long questionId, long categoryId)
     {
+    	if(!categoryRepository.existsById(categoryId)) {
+            throw new ResourceNotFoundException("Category","categoryId",categoryId);
+        }
+    	
+    	if(!questionRepository.existsById(questionId)) {
+            throw new ResourceNotFoundException("Question","questionId",questionId);
+        }
+    	
+    	
     	List<Answer>answers = answerRepository.findByQuestionId(questionId);
         List<Long> answerIds = answers.stream().map(Answer::getId).collect(Collectors.toList());
         List<Long> upvotes = new ArrayList<Long>();
@@ -67,8 +80,17 @@ public class AnswerService {
     	return ansResponses;
     }
 	
-    public Answer createAnswer(AnswerRequest ansReq, long questionId)
+    public Answer createAnswer(AnswerRequest ansReq, long questionId,long categoryId)
     {
+    	if(!categoryRepository.existsById(categoryId)) {
+            throw new ResourceNotFoundException("Category","categoryId",categoryId);
+        }
+    	
+    	if(!questionRepository.existsById(questionId)) {
+            throw new ResourceNotFoundException("Question","questionId",questionId);
+        }
+    	
+    	
     	Answer ans = new Answer();
     	Question ques = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Question", "id", questionId));
@@ -79,8 +101,17 @@ public class AnswerService {
     	return answerRepository.save(ans);
     }
     
-    public AnswerResponse castVoteAndGetUpdatedAnswer(Long answerId, UpvoteRequest voteRequest, UserPrincipal currentUser) {
-        Answer ans = answerRepository.findById(answerId)
+    public AnswerResponse castVoteAndGetUpdatedAnswer(Long answerId, Long questionId,Long categoryId, UpvoteRequest voteRequest, UserPrincipal currentUser) {
+        
+    	if(!categoryRepository.existsById(categoryId)) {
+            throw new ResourceNotFoundException("Category","categoryId",categoryId);
+        }
+    	
+    	if(!questionRepository.existsById(questionId)) {
+            throw new ResourceNotFoundException("Question","questionId",questionId);
+        }
+    	
+    	Answer ans = answerRepository.findById(answerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Answer", "id", answerId));
 
         User user = userRepository.getOne(currentUser.getId());
@@ -111,8 +142,16 @@ public class AnswerService {
         return ansObj;
     }
     
-    public AnswerResponse removeUpvote(Long answerId, UserPrincipal currentUser)
+    public AnswerResponse removeUpvote(Long answerId,Long questionId,Long categoryId, UserPrincipal currentUser)
     {
+    	if(!categoryRepository.existsById(categoryId)) {
+            throw new ResourceNotFoundException("Category","categoryId",categoryId);
+        }
+    	
+    	if(!questionRepository.existsById(questionId)) {
+            throw new ResourceNotFoundException("Question","questionId",questionId);
+        }
+    	
     	Answer ans = answerRepository.findById(answerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Answer", "id", answerId));
 

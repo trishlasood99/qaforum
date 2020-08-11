@@ -32,13 +32,20 @@ public class QuestionController {
 	
 	@GetMapping("/categories/{categoryId}/questions")
     public List<Question> getAllQuestionsByQuestionId(@PathVariable (value = "categoryId") Long categoryId) {
-        return questionRepository.findByCategoryId(categoryId);
+		if(!categoryRepository.existsById(categoryId)) {
+            throw new ResourceNotFoundException("Category","categoryId",categoryId);
+        }
+		return questionRepository.findByCategoryId(categoryId);		
     }
 	
 	@GetMapping("/categories/{categoryId}/questions/{questionId}")
-	public Question getQuestion(@PathVariable(value="questionId") Long questionId)
+	public Question getQuestion(@PathVariable(value="questionId") Long questionId,@PathVariable(value="categoryId") Long categoryId)
 	{
-        return questionRepository.findById(questionId).map(question -> {
+		if(!categoryRepository.existsById(categoryId)) {
+            throw new ResourceNotFoundException("Category","categoryId",categoryId);
+        }
+				
+		return questionRepository.findById(questionId).map(question -> {
             	
             return question;
         }).orElseThrow(() -> new ResourceNotFoundException("Question","questionId",questionId));

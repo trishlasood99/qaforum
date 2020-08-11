@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,29 +35,21 @@ import com.qaforum.www.qaforum.service.AnswerService;
 
 public class AnswerController {
 
-	@Autowired
-    private AnswerRepository answerRepository;
-
-    @Autowired
-    private UpvoteRepository voteRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
     @Autowired
     private AnswerService answerService;
 
     private static final Logger logger = LoggerFactory.getLogger(AnswerController.class);
     
     @GetMapping("/categories/{categoryId}/questions/{questionId}/answers")
-    public List<AnswerResponse> getAnswers(@CurrentUser UserPrincipal currentUser, @PathVariable (value = "questionId") Long questionId)
+    @PreAuthorize("hasRole('USER')")
+    public List<AnswerResponse> getAnswers(@CurrentUser UserPrincipal currentUser, @PathVariable (value = "questionId") Long questionId,  @PathVariable (value = "categoryId") Long categoryId)
     {
-    	return answerService.getAllAnswers(currentUser, questionId);
+    	return answerService.getAllAnswers(currentUser,questionId,categoryId);
     }
     
     @PostMapping("/categories/{categoryId}/questions/{questionId}/answers")
-    public ResponseEntity<?> createAns(@Valid @RequestBody AnswerRequest answerRequest, @PathVariable (value = "questionId") Long questionId) {
-        Answer ans = answerService.createAnswer(answerRequest,questionId);
+    public ResponseEntity<?> createAns(@Valid @RequestBody AnswerRequest answerRequest, @PathVariable (value = "questionId") Long questionId,  @PathVariable (value = "categoryId") Long categoryId) {
+        Answer ans = answerService.createAnswer(answerRequest,questionId,categoryId);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{questionId}")
@@ -66,14 +59,17 @@ public class AnswerController {
                 .body(new ApiResponse(true, "Answer Created Successfully"));
     }
     
+ 
     @PostMapping("/categories/{categoryId}/questions/{questionId}/answers/{answerId}/upvote")
-    public AnswerResponse castVote(@CurrentUser UserPrincipal currentUser, @PathVariable (value = "answerId") Long answerId, @Valid @RequestBody UpvoteRequest voteRequest) {
-    	return answerService.castVoteAndGetUpdatedAnswer(answerId, voteRequest, currentUser);
+    @PreAuthorize("hasRole('USER')")
+    public AnswerResponse castVote(@CurrentUser UserPrincipal currentUser, @PathVariable (value = "answerId") Long answerId,@PathVariable (value = "questionId") Long questionId,  @PathVariable (value = "categoryId") Long categoryId, @Valid @RequestBody UpvoteRequest voteRequest) {
+    	return answerService.castVoteAndGetUpdatedAnswer(answerId,questionId,categoryId, voteRequest, currentUser);
     }
     
     @DeleteMapping("/categories/{categoryId}/questions/{questionId}/answers/{answerId}/upvote")
-    public AnswerResponse deleteVote(@CurrentUser UserPrincipal currentUser, @PathVariable (value = "answerId") Long answerId) {
-    	return answerService.removeUpvote(answerId, currentUser);
+    @PreAuthorize("hasRole('USER')")
+    public AnswerResponse deleteVote(@CurrentUser UserPrincipal currentUser, @PathVariable (value = "answerId") Long answerId,@PathVariable (value = "questionId") Long questionId,  @PathVariable (value = "categoryId") Long categoryId) {
+    	return answerService.removeUpvote(answerId, questionId, categoryId, currentUser);
     }
     
 }
