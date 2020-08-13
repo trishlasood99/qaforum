@@ -17,7 +17,8 @@ import { AnswerlistComponent } from './answerlist/answerlist.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { authInterceptorProviders } from './auth.interceptor';
-
+import { ResourceNotFoundComponent } from './resource-not-found/resource-not-found.component';
+import {errorInterceptorProviders} from './error.interceptor';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { authInterceptorProviders } from './auth.interceptor';
     AnswerComponent,
     AnswerlistComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ResourceNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import { authInterceptorProviders } from './auth.interceptor';
     FormsModule,
     HttpClientModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,errorInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
