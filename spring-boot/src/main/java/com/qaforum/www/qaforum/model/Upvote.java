@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "upvotes", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
@@ -23,11 +26,13 @@ public class Upvote {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "answer_id", nullable = false)
+    @JoinColumn(name = "answer_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Answer answer;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
 	public Long getId() {

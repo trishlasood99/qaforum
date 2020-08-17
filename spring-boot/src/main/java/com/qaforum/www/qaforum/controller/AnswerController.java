@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.qaforum.www.qaforum.exceptions.ResourceNotFoundException;
 import com.qaforum.www.qaforum.model.Answer;
 import com.qaforum.www.qaforum.payload.AnswerRequest;
 import com.qaforum.www.qaforum.payload.AnswerResponse;
@@ -37,17 +38,21 @@ public class AnswerController {
 
     @Autowired
     private AnswerService answerService;
+    
+    @Autowired
+    private AnswerRepository answerRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(AnswerController.class);
     
     @GetMapping("/categories/{categoryId}/questions/{questionId}/answers")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') OR hasRole('ADMIN')")
     public List<AnswerResponse> getAnswers(@CurrentUser UserPrincipal currentUser, @PathVariable (value = "questionId") Long questionId,  @PathVariable (value = "categoryId") Long categoryId)
     {
     	return answerService.getAllAnswers(currentUser,questionId,categoryId);
     }
     
     @PostMapping("/categories/{categoryId}/questions/{questionId}/answers")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> createAns(@Valid @RequestBody AnswerRequest answerRequest, @PathVariable (value = "questionId") Long questionId,  @PathVariable (value = "categoryId") Long categoryId) {
         Answer ans = answerService.createAnswer(answerRequest,questionId,categoryId);
 
@@ -57,6 +62,18 @@ public class AnswerController {
 
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "Answer Created Successfully"));
+    }
+    
+   
+	@DeleteMapping("/categories/{categoryId}/questions/{questionId}/answers/{answerId}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> deleteQuestion(@PathVariable (value = "categoryId") Long categoryId,
+                              @PathVariable (value = "questionId") Long questionId,
+                              	@PathVariable (value = "answerId") Long answerId) {
+        return answerRepository.findById(answerId).map(answer -> {
+            answerRepository.delete(answer);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Answer","answerId",answerId));
     }
     
  

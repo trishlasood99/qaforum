@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,8 +82,10 @@ public class QuestionController {
         }).orElseThrow(() -> new ResourceNotFoundException("Question","questionId",questionId));
     }
 	
+	
 	@DeleteMapping("/categories/{categoryId}/questions/{questionId}")
-    public ResponseEntity<?> deleteQuestion(@PathVariable (value = "categoryId") Long categoryId,
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> deleteQuestion(@PathVariable (value = "categoryId") Long categoryId,
                               @PathVariable (value = "questionId") Long questionId) {
         return questionRepository.findByIdAndCategoryId(questionId, categoryId).map(question -> {
             questionRepository.delete(question);

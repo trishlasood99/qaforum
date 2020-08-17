@@ -5,12 +5,14 @@ import java.util.Optional;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.qaforum.www.qaforum.exceptions.ResourceNotFoundException;
 import com.qaforum.www.qaforum.model.Answer;
 import com.qaforum.www.qaforum.model.Upvote;
 import com.qaforum.www.qaforum.model.User;
 
+@Repository
 public interface UpvoteRepository extends JpaRepository < Upvote,Long>{
 	
 	@Query("SELECT COUNT(v.id) from Upvote v where v.answer.id = :answerId")
