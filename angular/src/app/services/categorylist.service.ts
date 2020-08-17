@@ -24,4 +24,8 @@ export class CategoryListService {
     },httpOptions);
   }
 
+  deleteCategory(categoryId:number){
+    return this.http.delete('http://localhost:5000/categories/'+categoryId,httpOptions);
+  }
+
 }

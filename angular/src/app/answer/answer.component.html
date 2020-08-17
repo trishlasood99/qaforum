@@ -1,3 +1,14 @@
-<p> {{ans.content}} </p>
+<!--<p> {{ans.content}} </p>
 <span> Upvotes: {{ans.upvotes}} </span> &nbsp; <span *ngIf="ans.userUpvoted==true"><button class="btn btn-danger" (click)=removeUpvote()> Remove upvote </button></span>
-<span *ngIf="ans.userUpvoted==false"><button class="btn btn-success" (click)=createUpvote()> Upvote </button></span>
+<span *ngIf="ans.userUpvoted==false"><button class="btn btn-success" (click)=createUpvote()> Upvote </button></span> -->
+<div *ngIf ="hideAnswer==false">
+<div class="card w-100">
+  <div class="card-body">
+    <p class="card-text">{{ans.content}}</p>
+    <p><b> Upvotes: {{ans.upvotes}} </b> </p>
+    &nbsp; <span *ngIf="ans.userUpvoted==true"><button class="btn btn-danger" (click)=removeUpvote()> Remove upvote </button></span>
+   <span *ngIf="ans.userUpvoted==false"><button class="btn btn-success" (click)=createUpvote()> Upvote </button></span> &nbsp;
+   <button class="btn btn-danger" (click) = deleteAnswer() >Delete</button>
+  </div>
+</div>
+</div>

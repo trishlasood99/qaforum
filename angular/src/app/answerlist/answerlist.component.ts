@@ -24,13 +24,13 @@ export class AnswerlistComponent implements OnInit {
   getAnswers(): void{
     const id2 = +this.route.snapshot.paramMap.get('id2');
     const id = +this.route.snapshot.paramMap.get('id');
-    this.answerService.getAnswers(id,id2).subscribe(answers=>this.answers=answers);
+    this.answerService.getAnswers(id2,id).subscribe(answers=>this.answers=answers);
   }
   getQuestion(): void{
     const id2 = +this.route.snapshot.paramMap.get('id2');
     const id = +this.route.snapshot.paramMap.get('id');
     console.log(id2);
-    this.answerService.getQuestion(id,id2).subscribe(question=>this.question=question);
+    this.answerService.getQuestion(id2,id).subscribe(question=>this.question=question);
 
     //this.questionService.getQuestion(id2).subscribe(question=>this.question=question);
   }

@@ -1,8 +1,13 @@
-<h3> {{ques.title}}</h3>
+<!--<h3> {{ques.title}}</h3>
 <br>
 <p>{{ques.description}}</p>
-
-
-  <!-- Add list of top answers -->
-  <!-- Add view all answers option to view all answers -->
-  <!-- Add functionality for answering questions -->
+-->
+<div *ngIf = "hideQuestion==false">
+<div class="card w-100">
+  <div class="card-body">
+    <h5 class="card-title">{{ques.title}}</h5>
+    <p class="card-text">{{ques.description}}.</p>
+    <button class="btn btn-primary " (click)=deleteQuestion()>Delete</button>
+  </div>
+</div>
+</div>

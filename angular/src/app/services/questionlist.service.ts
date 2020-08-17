@@ -29,4 +29,9 @@ export class QuestionListService {
   getCategory(id:number):Observable<any>{
     return this.http.get('http://localhost:5000/categories/'+id);
   }
+
+  deleteQuestion(categoryId:number,questionId:number)
+  {
+    return this.http.delete('http://localhost:5000/categories/'+categoryId+'/questions/'+questionId,httpOptions);
+  }
 }

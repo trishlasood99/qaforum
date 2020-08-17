@@ -40,4 +40,8 @@ export class AnswerListService {
     return this.http.delete('http://localhost:5000/categories/'+categoryId+'/questions/'+questionId+'/answers/'+answerId+'/upvote');
   }
 
+  deleteAnswer(answerId:number,questionId:number,categoryId:number)
+  {
+      return this.http.delete('http://localhost:5000/categories/'+categoryId+'/questions/'+questionId+'/answers/'+answerId);
+  }
 }

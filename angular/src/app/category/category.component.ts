@@ -1,6 +1,6 @@
 import { Component,Input, OnInit, Output, EventEmitter } from '@angular/core';
-
-import {Category} from '../models/category.model'
+import {Category} from '../models/category.model';
+import {CategoryListService} from '../services/categorylist.service';
 
 @Component({
   selector: 'ques-category',
@@ -11,8 +11,8 @@ export class CategoryComponent implements OnInit {
 
   @Output() selectedCategory = new EventEmitter<void> ();
   @Input() category:Category;  //@Input exposes category property of the controller for binding
-
-  constructor() {
+  hideCategory=false;
+  constructor(private categoryService:CategoryListService) {
 
   }
 
@@ -20,6 +20,12 @@ export class CategoryComponent implements OnInit {
   }
   onSelection(){
     this.selectedCategory.emit();
+  }
+
+  deleteCategory()
+  {
+    this.categoryService.deleteCategory(this.category.id).subscribe(()=>console.log("Category deleted"));
+    this.hideCategory=true;
   }
 
 }
