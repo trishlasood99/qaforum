@@ -89,4 +89,15 @@ public class AnswerController {
     	return answerService.removeUpvote(answerId, questionId, categoryId, currentUser);
     }
     
+    
+    @GetMapping("/categories/{categoryId}/questions/{questionId}/answers/{answerId}/getcontent")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getAnswerContent(@PathVariable (value = "answerId") Long answerId)
+    {
+    	return answerRepository.findById(answerId).map(answer -> {
+        	
+            return answer.getContent();
+        }).orElseThrow(() -> new ResourceNotFoundException("Answer","answerId",answerId));
+    }
+    
 }
