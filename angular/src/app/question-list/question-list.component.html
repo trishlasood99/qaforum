@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-6">
       <div *ngFor="let x of questions">
-        <a [routerLink]="['question',x.id]"><app-question [ques]="x"> </app-question></a>
+        <app-question [ques]="x"> </app-question>
       </div>
     </div>
 

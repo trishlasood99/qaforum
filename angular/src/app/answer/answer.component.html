@@ -8,7 +8,18 @@
     <p><b> Upvotes: {{ans.upvotes}} </b> </p>
     &nbsp; <span *ngIf="ans.userUpvoted==true"><button class="btn btn-danger" (click)=removeUpvote()> Remove upvote </button></span>
    <span *ngIf="ans.userUpvoted==false"><button class="btn btn-success" (click)=createUpvote()> Upvote </button></span> &nbsp;
-   <button class="btn btn-danger" (click) = deleteAnswer() >Delete</button>
+   <button class="btn btn-danger" (click) = deleteAnswer() >Delete</button>&nbsp;
+   <button class="btn btn-danger" (click) = clickReport() >Report</button>
+   <div *ngIf="hideReportForm==false">
+     <form>
+
+         <div class="form-group">
+           <label for="reportContent">Message for admin:</label><br>
+           <textarea name="content" rows="8" cols="80" id="reportContent" [(ngModel)]="newReportText">Enter reasons for reporting here</textarea>
+         </div>
+         <button class="btn btn-danger" (click)=reportAnswer(newReportText)> Submit Report </button>
+     </form>
+   </div>
   </div>
 </div>
 </div>

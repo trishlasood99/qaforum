@@ -44,4 +44,9 @@ export class AnswerListService {
   {
       return this.http.delete('http://localhost:5000/categories/'+categoryId+'/questions/'+questionId+'/answers/'+answerId);
   }
+
+  getAnswerContent(answerId:number,questionId:number,categoryId:number)
+  {
+      return this.http.get('http://localhost:5000/categories/'+categoryId+'/questions/'+questionId+'/answers/'+answerId+'/getcontent');
+  }
 }

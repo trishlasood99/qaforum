@@ -7,6 +7,7 @@ import {AnswerlistComponent} from './answerlist/answerlist.component';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {ResourceNotFoundComponent} from './resource-not-found/resource-not-found.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'category/:id',component:QuestionListComponent},
   {path:'category/:id/question/:id2',component:AnswerlistComponent},
-  {path:'resultsnotfound/:status',component:ResourceNotFoundComponent}
+  {path:'resultsnotfound/:status',component:ResourceNotFoundComponent},
+  {path:'admin/dashboard',component:DashboardComponent}
 ];
 
 @NgModule({

@@ -19,6 +19,8 @@ import { SignupComponent } from './signup/signup.component';
 import { authInterceptorProviders } from './auth.interceptor';
 import { ResourceNotFoundComponent } from './resource-not-found/resource-not-found.component';
 import {errorInterceptorProviders} from './error.interceptor';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import {errorInterceptorProviders} from './error.interceptor';
     AnswerlistComponent,
     LoginComponent,
     SignupComponent,
-    ResourceNotFoundComponent
+    ResourceNotFoundComponent,
+    DashboardComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,18 @@
     <p class="card-text">{{category.description}}</p>
     <button class="btn btn-primary" (click)=onSelection()>Explore</button> &nbsp;
     <button class="btn btn-danger" (click)=deleteCategory()>Delete</button>
+    <button class="btn btn-danger" (click) = clickReport() >Report</button>
+    <div *ngIf="hideReportForm==false">
+      <form>
+
+          <div class="form-group">
+            <label for="reportContent">Message for admin:</label><br>
+            <textarea name="content" rows="8" cols="80" id="reportContent" [(ngModel)]="newReportText">Enter reasons for reporting here</textarea>
+          </div>
+          <button class="btn btn-danger" (click)=reportCategory(newReportText)> Submit Report </button>
+      </form>
+    </div>
+
   </div>
 </div>
 </div>

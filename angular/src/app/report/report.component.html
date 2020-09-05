@@ -1,0 +1,31 @@
+<div class="card" *ngIf = "hideReport==false">
+  <div class="card-body">
+    <p> Category Id: {{report.category_id}} </p>
+    <p *ngIf = "report.question_id!=null"> Question Id: {{report.question_id}} </p>
+    <p *ngIf = "report.answer_id!=null"> Answer Id: {{report.answer_id}} </p>
+    <p> Complaint: {{report.content}} </p>
+    <button class="btn btn-danger" (click) = deleteReport()>Delete Complaint</button> &nbsp;
+    <span *ngIf = "report.question_id!=null && report.answer_id == null"> <button class="btn btn-danger" (click) = deleteQuestion()> Delete Item </button> </span>
+    <span *ngIf = "report.question_id!=null && report.answer_id != null"> <button class="btn btn-danger" (click) = deleteAnswer()> Delete Item </button> </span>
+    <span *ngIf = "report.question_id==null && report.answer_id == null"> <button class="btn btn-danger" (click) = deleteCategory()> Delete Item </button> </span>
+     &nbsp;
+     <span *ngIf = "report.question_id!=null && report.answer_id == null"> <button class="btn btn-primary" (click) = viewQuestion()> View Item </button> </span>
+     <span *ngIf = "report.question_id!=null && report.answer_id != null"> <button class="btn btn-primary" (click) = viewAnswer()> View Item </button> </span>
+     <span *ngIf = "report.question_id==null && report.answer_id == null"> <button class="btn btn-primary" (click) = viewCategory()> View Item </button> </span>
+
+     <div *ngIf = "ansContent">
+       <p> {{ansContent}} </p>
+     </div>
+
+     <div *ngIf = "questionReported">
+       <p>{{questionReported.title}}</p>
+       <p>{{questionReported.description}}.</p>
+     </div>
+
+     <div *ngIf = "categoryReported">
+       <p>{{categoryReported.name}} </p>
+       <p>{{categoryReported.description}}</p>
+     </div>
+
+  </div>
+</div>

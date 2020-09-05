@@ -40,10 +40,12 @@ export class AnswerlistComponent implements OnInit {
     //this.answers.push(newAnswer);
     const id2 = +this.route.snapshot.paramMap.get('id2');
     const id = +this.route.snapshot.paramMap.get('id');
-    this.answerService.createAnswer(id,id2,answerContent).subscribe(newAnswer=>this.answers.push(newAnswer));
+    this.answerService.createAnswer(id2,id,answerContent).subscribe(newAnswer=>this.answers.push(newAnswer));
   }
   displayCreateForm()
   {
     this.formhidden=(this.formhidden==1)?0:1;
   }
+
+
 }

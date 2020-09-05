@@ -7,7 +7,20 @@
   <div class="card-body">
     <h5 class="card-title">{{ques.title}}</h5>
     <p class="card-text">{{ques.description}}.</p>
-    <button class="btn btn-primary " (click)=deleteQuestion()>Delete</button>
+    <button class="btn btn-primary " (click)=deleteQuestion()>Delete</button> &nbsp; &nbsp;
+    <a [routerLink]="['question',ques.id]"><button class="btn btn-primary">Explore Answers</button></a>
+    <button class="btn btn-danger" (click) = clickReport() >Report</button>
+    <div *ngIf="hideReportForm==false">
+      <form>
+
+          <div class="form-group">
+            <label for="reportContent">Message for admin:</label><br>
+            <textarea name="content" rows="8" cols="80" id="reportContent" [(ngModel)]="newReportText">Enter reasons for reporting here</textarea>
+          </div>
+          <button class="btn btn-danger" (click)=reportQuestion(newReportText)> Submit Report </button>
+      </form>
+    </div>
+   </div>
+
   </div>
-</div>
 </div>
